@@ -1,0 +1,111 @@
+/* -------------------- General Body -------------------- */
+body {
+    background-color: #f4f7f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    padding-bottom: 50px;
+}
+
+/* -------------------- Headings -------------------- */
+h1 {
+    color: #222;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+h2 {
+    color: #444;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+/* -------------------- Tabs -------------------- */
+.nav-tabs .nav-link {
+    font-weight: 600;
+    color: #555;
+    border-radius: 10px 10px 0 0;
+    margin-right: 5px;
+    transition: all 0.2s;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff !important;
+    color: #fff !important;
+}
+
+/* -------------------- Cards -------------------- */
+.card {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+/* -------------------- Form Labels -------------------- */
+form label {
+    font-weight: 600;
+    color: #555;
+}
+
+/* -------------------- Input Fields -------------------- */
+form input[type="number"],
+form input[type="text"] {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    width: 100%;
+    transition: border 0.2s;
+    margin-top: 5px;
+}
+
+form input[type="number"]:focus,
+form input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* -------------------- Buttons -------------------- */
+button {
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Color-coded buttons */
+.btn-primary { background-color: #007bff; border: none; }
+.btn-success { background-color: #28a745; border: none; }
+.btn-danger  { background-color: #dc3545; border: none; }
+
+/* -------------------- Prediction Alert -------------------- */
+.alert {
+    border-radius: 10px;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* -------------------- Container -------------------- */
+.container {
+    max-width: 1000px;
+}
+
+/* -------------------- Responsive Adjustments -------------------- */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    .card {
+        padding: 20px;
+    }
+}

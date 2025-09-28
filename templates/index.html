@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Disease Prediction Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Disease Prediction Dashboard</h1>
+    <p>Fill in the patient details carefully. Dropdowns are provided for categorical features.</p>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mt-4" id="diseaseTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="heart-tab" data-bs-toggle="tab" data-bs-target="#heart" type="button">Heart Disease</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="diabetes-tab" data-bs-toggle="tab" data-bs-target="#diabetes" type="button">Diabetes</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="breast-tab" data-bs-toggle="tab" data-bs-target="#breast" type="button">Breast Cancer</button>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4">
+
+        <!-- Heart Disease -->
+        <div class="tab-pane fade show active" id="heart">
+            <div class="card p-4">
+                <form method="POST" action="{{ url_for('predict', disease='heart') }}">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label>Age (18–100)</label>
+                            <input type="number" name="age" min="18" max="100" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Sex</label>
+                            <select name="sex" class="form-control">
+                                <option value="0">Female</option>
+                                <option value="1">Male</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Chest Pain Type (0–3)</label>
+                            <select name="cp" class="form-control">
+                                <option value="0">Typical Angina</option>
+                                <option value="1">Atypical Angina</option>
+                                <option value="2">Non-Anginal Pain</option>
+                                <option value="3">Asymptomatic</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Resting BP (90–200)</label>
+                            <input type="number" name="trestbps" min="90" max="200" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Cholesterol (100–400)</label>
+                            <input type="number" name="chol" min="100" max="400" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Fasting Blood Sugar</label>
+                            <select name="fbs" class="form-control">
+                                <option value="0">≤ 120 mg/dl</option>
+                                <option value="1">> 120 mg/dl</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Resting ECG (0–2)</label>
+                            <select name="restecg" class="form-control">
+                                <option value="0">Normal</option>
+                                <option value="1">ST-T Wave Abnormality</option>
+                                <option value="2">Left Ventricular Hypertrophy</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Max Heart Rate Achieved (60–220)</label>
+                            <input type="number" name="thalach" min="60" max="220" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Exercise Induced Angina</label>
+                            <select name="exang" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Oldpeak (0–6)</label>
+                            <input type="number" name="oldpeak" min="0" max="6" step="0.1" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Slope (0–2)</label>
+                            <select name="slope" class="form-control">
+                                <option value="0">Upsloping</option>
+                                <option value="1">Flat</option>
+                                <option value="2">Downsloping</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Major Vessels (0–3)</label>
+                            <select name="ca" class="form-control">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Thalassemia</label>
+                            <select name="thal" class="form-control">
+                                <option value="1">Normal</option>
+                                <option value="2">Fixed Defect</option>
+                                <option value="3">Reversible Defect</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Predict</button>
+                </form>
+
+                {% if prediction and disease == 'heart' %}
+                    <div class="alert alert-info mt-3">
+                        <strong>Heart Disease Prediction:</strong>
+                        {% if prediction==0 %} No Disease {% else %} Disease Detected {% endif %}
+                    </div>
+                {% endif %}
+                {% if message %}
+                    <div class="alert alert-danger mt-3">{{ message }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Diabetes -->
+        <div class="tab-pane fade" id="diabetes">
+            <div class="card p-4">
+                <form method="POST" action="{{ url_for('predict', disease='diabetes') }}">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label>Pregnancies (0–20)</label>
+                            <input type="number" name="Pregnancies" min="0" max="20" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Glucose (50–250)</label>
+                            <input type="number" name="Glucose" min="50" max="250" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Blood Pressure (40–140)</label>
+                            <input type="number" name="BloodPressure" min="40" max="140" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Skin Thickness (0–100)</label>
+                            <input type="number" name="SkinThickness" min="0" max="100" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Insulin (0–900)</label>
+                            <input type="number" name="Insulin" min="0" max="900" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>BMI (10–70)</label>
+                            <input type="number" name="BMI" min="10" max="70" step="0.1" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Diabetes Pedigree Function (0–2.5)</label>
+                            <input type="number" name="DiabetesPedigreeFunction" min="0" max="2.5" step="0.01" class="form-control" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Age (18–100)</label>
+                            <input type="number" name="Age" min="18" max="100" class="form-control" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Predict</button>
+                </form>
+
+                {% if prediction and disease == 'diabetes' %}
+                    <div class="alert alert-info mt-3">
+                        <strong>Diabetes Prediction:</strong>
+                        {% if prediction==0 %} No Disease {% else %} Disease Detected {% endif %}
+                    </div>
+                {% endif %}
+                {% if message and disease == 'diabetes' %}
+    <div class="alert alert-danger mt-3">{{ message }}</div>
+{% endif %}
+            </div>
+        </div>
+<!-- Breast Cancer -->
+<div class="tab-pane fade" id="breast">
+    <div class="card p-4">
+        <form method="POST" action="{{ url_for('predict', disease='breast') }}">
+            <div class="row">
+                {% set bc_features = [
+                    'radius_mean','texture_mean','perimeter_mean','area_mean','smoothness_mean',
+                    'compactness_mean','concavity_mean','concave_points_mean','symmetry_mean','fractal_dimension_mean',
+                    'radius_se','texture_se','perimeter_se','area_se','smoothness_se',
+                    'compactness_se','concavity_se','concave_points_se','symmetry_se','fractal_dimension_se',
+                    'radius_worst','texture_worst','perimeter_worst','area_worst','smoothness_worst',
+                    'compactness_worst','concavity_worst','concave_points_worst','symmetry_worst','fractal_dimension_worst'
+                ] %}
+                
+                {% for feature in bc_features %}
+                <div class="col-md-3 mb-3">
+                    <label>{{ feature|replace('_',' ')|capitalize }}</label>
+                    <input type="number" step="any" name="{{ feature }}" class="form-control" required>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Predict</button>
+        </form>
+
+        {% if prediction and disease == 'breast' %}
+        <div class="alert alert-info mt-3">
+            <strong>Breast Cancer Prediction:</strong>
+            {% if prediction==0 %} No Disease {% else %} Disease Detected {% endif %}
+        </div>
+        {% endif %}
+        {% if message and disease == 'breast' %}
+        <div class="alert alert-danger mt-3">{{ message }}</div>
+        {% endif %}
+    </div>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const activeDisease = "{{ disease }}";
+    if(activeDisease) {
+        const triggerEl = document.querySelector(`#${activeDisease}-tab`);
+        if(triggerEl){
+            const tab = new bootstrap.Tab(triggerEl);
+            tab.show();
+        }
+    }
+});
+</script>
+
+</body>
+</html>

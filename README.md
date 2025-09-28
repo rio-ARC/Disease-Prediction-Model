@@ -1,6 +1,6 @@
-# 👨‍💻 Subhajit Das | Disease Prediction App
+# 👨‍💻 Aritra Roy Choudhury | Disease Prediction App
 
-Welcome to my GitHub profile! I'm Subhajit Das, a passionate developer focused on creating impactful solutions in the healthcare domain. One of my notable projects is the **Disease Prediction App**, a web application designed to predict diseases based on user-reported symptoms.
+Welcome to my GitHub profile! I'm Aritra Roy Choudhry, a passionate developer focused on creating impactful solutions in the healthcare domain. One of my notable projects is the **Disease Prediction App**, a web application designed to predict diseases based on user-reported symptoms.
 
 🔗 **Live Demo**: [diseasepredictionapp-2-miua.onrender.com](https://diseasepredictionapp-2-miua.onrender.com/)
 
@@ -32,7 +32,7 @@ To run the project locally:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Subhajit-Das-1/DiseasePredictionApp.git
+   git clone https://github.com/rio-ARC/Disease-Prediction-Model
    cd DiseasePredictionApp
 Set up a virtual environment:
 
